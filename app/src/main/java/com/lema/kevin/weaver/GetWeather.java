@@ -14,9 +14,7 @@ import java.net.URL;
  * Created by kevin on 24/11/2016.
  */
 
-public class GetResponse extends AsyncTask<URL, Void, String> {
-
-    public static String TOKEN="ETTRVA53SR7YM5JYFPQYFCBMPWKTOTKX";
+public class GetWeather extends AsyncTask<URL, Void, String> {
 
 
 
@@ -26,7 +24,7 @@ public class GetResponse extends AsyncTask<URL, Void, String> {
 
     public AsyncResponse delegate = null;
 
-    public GetResponse(AsyncResponse delegate){
+    public GetWeather(AsyncResponse delegate){
         this.delegate = delegate;
     }
 
@@ -43,10 +41,8 @@ public class GetResponse extends AsyncTask<URL, Void, String> {
 
             // Create the request to OpenWeatherMap, and open the connection
             urlConnection = (HttpURLConnection) urls[0].openConnection();
-            urlConnection.setRequestMethod("POST");
-            urlConnection.addRequestProperty("Authorization", "Bearer "+TOKEN);
-            urlConnection.addRequestProperty("Accept", "application/json");
-            urlConnection.addRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestMethod("GET");
+            urlConnection.addRequestProperty("Accept-Encoding", "gzip");
 
 
             urlConnection.connect();

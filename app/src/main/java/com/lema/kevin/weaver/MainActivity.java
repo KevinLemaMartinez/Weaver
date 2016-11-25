@@ -161,7 +161,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
              //   url = new URL("https://api.wit.ai/message?q=" + matches.get(0) + " ");
 
 
-                url = new URL("https://api.wit.ai/message?q=" + remove(matches.get(0)).replaceAll(" ", "%20"));
+                url = new URL("https://api.wit.ai/converse?v=20160526&session_id=123abc&q=" + remove(matches.get(0)).replaceAll(" ", "%20"));
                 Log.i("url", url.toString());
 
                // new GetResponse().execute(url);
@@ -178,10 +178,49 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                             if(output!=null){
                                 JSONObject jObject = new JSONObject(output);
 
-                                // JSONObject entities = jObject.getJSONObject("entities");
+                                 JSONObject entities = jObject.getJSONObject("entities");
+
+                                 if(jObject.getString("type").equalsIgnoreCase("msg")){
+
+                                     speak(jObject.getString("msg"));
+
+                               /*        while(!(jObject.getString("type").equalsIgnoreCase("stop"))){
+                                          speak(jObject.getString("msg"));
+                                          new GetResponse(new GetResponse.AsyncResponse(){
+
+                                              @Override
+                                              public void processFinish(String output) {
+
+                                              }
+                                          }).execute(new URL("https://api.wit.ai/converse?v=20160526&session_id=123abc"));
+                               */
 
 
-                                speak(jObject.getString("_text"));
+                                 }else if(jObject.getString("type").equalsIgnoreCase("merge")){
+                                     speak("asd");
+                                 }
+
+                                if(entities.getJSONArray("clima")!=null){
+
+                                    speak("Hace mucho calor");
+
+                               //     new GetResponse(new GetResponse.AsyncResponse() {
+
+                             //           @Override
+                            //            public void processFinish(String output) {
+
+                            //            }
+                            //        }).execute(new URL(""));
+
+
+
+
+
+
+                                }
+
+
+
 
                             }else{
                                 speak("Lo siento, no te he entendido");
@@ -193,7 +232,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
 
 
                     }
