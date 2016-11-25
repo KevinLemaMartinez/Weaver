@@ -1,5 +1,13 @@
 package com.lema.kevin.weaver;
 
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +16,7 @@ import java.util.Map;
  * Created by Kevin on 2/11/16.
  */
 
-public class Busqueda {
+class Busqueda {
     private ArrayList<String> matches;
     private Map <String,String> answers;
 
@@ -26,7 +34,10 @@ public class Busqueda {
 
     public String buscar(){
 
-        for(int i=0;i<matches.size();i++){
+
+
+
+     for(int i=0;i<matches.size();i++){
             for ( String key : answers.keySet() ) {
                 if (matches.get(i).equalsIgnoreCase(key)){
                     return (answers.get(key));
@@ -34,6 +45,7 @@ public class Busqueda {
             }
         }
         return (matches.get(0));
+
     }
 
 }
